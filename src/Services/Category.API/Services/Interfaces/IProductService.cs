@@ -7,5 +7,6 @@ namespace Product.API.Services.Interfaces
     {
         Task<IEnumerable<ProductDto>> GetProductsAsync();
         Task<ProductDto> GetProductAsync(Guid id);
+        Task<ProductDto> CreateProductAsync(CreateProductDto request);
     }
 }

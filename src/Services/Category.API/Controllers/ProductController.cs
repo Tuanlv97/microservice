@@ -1,5 +1,6 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Product.API.Entities;
 using Product.API.Services.Interfaces;
 using Shared.DTOs.Product;
 using System.ComponentModel.DataAnnotations;
@@ -30,6 +31,14 @@ namespace Product.API.Controllers
         {
             var product = await _productService.GetProductAsync(id);
             return Ok(product);
+        }
+
+        [HttpPost]
+       // [ClaimRequirement(FunctionCode.PRODUCT, CommandCode.CREATE)]
+        public async Task<IActionResult> CreateProduct([FromBody] CreateProductDto productDto)
+        {
+            var result = await _productService.CreateProductAsync(productDto);
+            return Ok(result);
         }
 
         #endregion CRUD

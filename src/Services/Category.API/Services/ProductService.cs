@@ -20,6 +20,20 @@ namespace Product.API.Services
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
+        public async Task<ProductDto> CreateProductAsync(CreateProductDto request)
+        {
+            _logger.Information($"BEGIN: CreateProductAsync");
+            var productEntity = await _productRepository.GetProductByNoAsync(request.No);
+            if (productEntity != null) throw new  ($"Product No: {request.No} is existed.");
+
+            var product = _mapper.Map<CatalogProduct>(request);
+            await _productRepository.CreateProductAsync(product);
+            var result = _mapper.Map<ProductDto>(product);
+            _logger.Information($"END: CreateProductAsync");
+            return result;
+
+        }
+
         public async Task<ProductDto> GetProductAsync(Guid id)
         {
             _logger.Information($"BEGIN: GetProductAsync ById : {id}");

@@ -10,6 +10,8 @@ using Product.API.Repositories;
 using Shared.Configurations;
 using Product.API.Services.Interfaces;
 using Product.API.Services;
+using FluentValidation.AspNetCore;
+using Shared.DTOs.Product;
 
 namespace Product.API.Extensions
 {
@@ -35,7 +37,8 @@ namespace Product.API.Extensions
 
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddControllers();
+            services.AddControllers()
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<ProductValidator>());
             services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             services.AddEndpointsApiExplorer();
