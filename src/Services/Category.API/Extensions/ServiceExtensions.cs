@@ -8,6 +8,8 @@ using Product.API.Persistence;
 using Product.API.Repositories.Interfaces;
 using Product.API.Repositories;
 using Shared.Configurations;
+using Product.API.Services.Interfaces;
+using Product.API.Services;
 
 namespace Product.API.Extensions
 {
@@ -24,9 +26,9 @@ namespace Product.API.Extensions
                     .Get<DatabaseSettings>();
                 services.AddSingleton(databaseSettings);
 
-                var apiConfiguration = configuration.GetSection(nameof(ApiConfiguration))
-                    .Get<ApiConfiguration>();
-                services.AddSingleton(apiConfiguration);
+                //var apiConfiguration = configuration.GetSection(nameof(ApiConfiguration))
+                //    .Get<ApiConfiguration>();
+              //  services.AddSingleton(apiConfiguration);
 
                 return services;
             }
@@ -68,6 +70,7 @@ namespace Product.API.Extensions
             return services.AddScoped(typeof(IRepositoryBase<,,>), typeof(RepositoryBase<,,>))
                     .AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>))
                     .AddScoped<IProductRepository, ProductRepository>()
+                    .AddScoped<IProductService, ProductService>()
                 ;
         }
     }

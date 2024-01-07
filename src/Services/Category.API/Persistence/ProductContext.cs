@@ -1,8 +1,6 @@
-﻿using Product.API.Entities;
-using Contracts.Domains.Interfaces;
+﻿using Contracts.Domains.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Reflection.Emit;
+using Product.API.Entities;
 
 namespace Product.API.Persistence
 {
@@ -54,5 +52,5 @@ namespace Product.API.Persistence
             return base.SaveChangesAsync(cancellationToken);
         }
     }
-   
+
 }
